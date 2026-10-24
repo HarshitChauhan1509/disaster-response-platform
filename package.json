@@ -1,0 +1,27 @@
+{
+  "name": "disaster-response-platform",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Santrionn Technologies - Disaster Response Coordination Platform",
+  "workspaces": [
+    "apps/api",
+    "apps/web"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspaces",
+    "dev:api": "npm run dev --workspace=apps/api",
+    "dev:web": "npm run dev --workspace=apps/web",
+    "build": "npm run build --workspaces",
+    "build:api": "npm run build --workspace=apps/api",
+    "build:web": "npm run build --workspace=apps/web",
+    "test": "npm run test --workspace=apps/api",
+    "lint": "npm run lint --workspaces"
+  },
+  "keywords": [
+    "disaster-response",
+    "coordination",
+    "emergency-management"
+  ],
+  "author": "Santrionn Technologies Candidate",
+  "license": "UNLICENSED"
+}
