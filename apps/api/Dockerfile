@@ -2,8 +2,8 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-# Enable corepack and pnpm
-RUN corepack enable && corepack prepare pnpm@latest --activate
+# Enable corepack and pin pnpm to stable v9
+RUN corepack enable && corepack prepare pnpm@9 --activate
 
 # Copy monorepo configuration
 COPY pnpm-workspace.yaml package.json ./
@@ -27,7 +27,7 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV PORT=5000
 
-RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN corepack enable && corepack prepare pnpm@9 --activate
 
 COPY pnpm-workspace.yaml package.json ./
 COPY apps/api/package.json ./apps/api/

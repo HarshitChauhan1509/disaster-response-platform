@@ -2,8 +2,6 @@
 
 An end-to-end, concurrency-safe, production-grade **Disaster Response Coordination Platform** engineered for emergency dispatchers, coordinators, and field response personnel.
 
-Built as an engineering assignment for the **Founding Engineer / Founding Team Software Engineer** role at **Santrionn Technologies Private Limited**.
-
 ---
 
 ## 1. Executive Summary & Product Architecture
