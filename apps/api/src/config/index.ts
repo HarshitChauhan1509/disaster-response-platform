@@ -12,7 +12,7 @@ const envSchema = z.object({
   MONGODB_URI: z.string().default('mongodb://localhost:27017/disaster_response_db'),
   JWT_SECRET: z.string().min(16, 'JWT_SECRET must be at least 16 characters long').default('super-secret-jwt-key-for-dev-min-32-chars-long!'),
   JWT_EXPIRES_IN: z.string().default('7d'),
-  CORS_ORIGIN: z.string().default('http://localhost:5173'),
+  CORS_ORIGIN: z.string().default('*'),
   LOG_LEVEL: z.enum(['trace', 'debug', 'info', 'warn', 'error', 'fatal']).default('info'),
 });
 
