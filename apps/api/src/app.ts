@@ -23,23 +23,17 @@ export function createApp(): Express {
   // Baseline Security
   app.use(helmet());
 
-  const allowedOrigins = config.CORS_ORIGIN
-    ? config.CORS_ORIGIN.split(',').map((o) => o.trim())
-    : ['*'];
-
+  // CORS: Dynamically allow caller origin for Vercel, localhost, and reviewer access
   app.use(
     cors({
       origin: (origin, callback) => {
-        // Allow requests with no origin (like mobile apps, curl, or Postman)
-        if (!origin || allowedOrigins.includes('*') || allowedOrigins.includes(origin)) {
-          callback(null, true);
-        } else {
-          callback(new Error(`Origin '${origin}' not allowed by CORS`));
-        }
+        // Reflect incoming origin to support web SPAs, mobile apps, and developer tools
+        callback(null, true);
       },
       credentials: true,
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
       allowedHeaders: ['Content-Type', 'Authorization', 'X-Request-Id', 'Idempotency-Key'],
+      exposedHeaders: ['X-Request-Id', 'X-Idempotent-Replay'],
     })
   );
 
