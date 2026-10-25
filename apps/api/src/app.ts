@@ -22,9 +22,21 @@ export function createApp(): Express {
 
   // Baseline Security
   app.use(helmet());
+
+  const allowedOrigins = config.CORS_ORIGIN
+    ? config.CORS_ORIGIN.split(',').map((o) => o.trim())
+    : ['*'];
+
   app.use(
     cors({
-      origin: config.CORS_ORIGIN || '*',
+      origin: (origin, callback) => {
+        // Allow requests with no origin (like mobile apps, curl, or Postman)
+        if (!origin || allowedOrigins.includes('*') || allowedOrigins.includes(origin)) {
+          callback(null, true);
+        } else {
+          callback(new Error(`Origin '${origin}' not allowed by CORS`));
+        }
+      },
       credentials: true,
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
       allowedHeaders: ['Content-Type', 'Authorization', 'X-Request-Id', 'Idempotency-Key'],
